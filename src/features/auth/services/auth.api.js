@@ -12,13 +12,15 @@ export async function register({ username, email, password }) {
         const response = await api.post('/api/auth/register', {
             username, email, password
         })
+        console.log("backend saying :)", response.data.message)
         return response.data
     } catch (e) {
-        console.log(e)
+        const realmessage = e.response?.data?.message || e.message || "An error occurred";
+        throw new Error(realmessage);
     }
 }
 export async function login({ email, password }) {
-    // console.log("auth.api" ,email ,password )
+    
     try {
         const response = await api.post('/api/auth/login', {
             email, password
@@ -44,10 +46,12 @@ export async function getme() {
         const response = await api.get('/api/auth/get-me', {
             withCredentials: true
         })
+            console.log("backend saying :)", response.data.message)
+        
         return response.data
     }
     
     catch (e) {
-        console.log(e)
+        const realmessage = e.response?.data?.message || e.message || "An error occurred";
     }
 }

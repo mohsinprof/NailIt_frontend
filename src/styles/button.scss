@@ -1,20 +1,29 @@
-.button{
-    border:none;
-    
+// ==========================================
+// BUTTON STYLESHEET (button.scss)
+// ==========================================
+
+.button {
+    border: none;
     outline: none;
     padding-inline: 1.5rem;
     padding-block: 0.75rem;
-    border-radius: 1rem; 
-    color:rgb(40, 1, 1);
+    border-radius: 1rem;
+    color: #0D0D0D; // Updated from old wine red to match your dark theme base
     cursor: pointer;
-    transition: all 50ms ease-in-out;
+    font-weight: 600;
+    transition: all 100ms ease-in-out;
 
-    &.primary-button{
-        background-color:aquamarine ;
-        color:rgb(40, 1, 1);
-    }
-    &:active{
-        transform: scale(1.1);
+    &.primary-button {
+        background-color: #F2E205; // Vibrant Golden Yellow from your palette
+        color: #0D0D0D; // High-contrast text for readability
+
+        &:hover {
+            background-color: #F2A007; // Shifts to Rich Amber Orange on hover
+            box-shadow: 0 4px 15px rgba(242, 160, 7, 0.35);
+        }
     }
 
+    &:active {
+        transform: scale(1.05); // Kept your scaling behavior
+    }
 }

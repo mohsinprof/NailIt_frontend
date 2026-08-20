@@ -1,12 +1,25 @@
 @use "./styles/button.scss";
 
-*{
+// Global Theme Variables (Your New Color Scheme)
+$bg-main: #0D0D0D;
+$bg-gradient: linear-gradient(135deg, #163E8C 0%, #0D0D0D 100%);
+$text-main: #F8FAFC;
+$accent-yellow: #F2E205;
+$accent-orange: #F2A007;
+$accent-green: #3E8C51;
+
+* {
     margin: 0%;
     padding: 0%;
     box-sizing: border-box;
 }
-html,body,#root{
+
+html,
+body,
+#root {
     width: 100%;
-    background-color: rgb(29, 1, 1);
-    color: whitesmoke;
+    min-height: 100vh;
+    // background: $bg-gradient; // Uses your deep royal blue (#163E8C) and near-black (#0D0D0D) mix
+    color: $text-main; // Clean, bright foreground text
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
 }

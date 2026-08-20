@@ -1,0 +1,242 @@
+// ==========================================
+// THEME CONFIGURATION & COLOR VARIABLES
+// ==========================================
+
+// 1. BACKGROUND COLORS
+$bg-main: #0D0D0D;
+$bg-gradient: linear-gradient(135deg, #163E8C 0%, #0D0D0D 100%); // Deep royal blue to near black
+$bg-card: linear-gradient(135deg, #D0E9F2 0%, #C2E2D6 100%); // Ice-blue to soft green card gradient
+$bg-input: #FFFFFF; // Clean white input background for readability inside light cards
+
+// 2. BORDERS & FOCUS STATES
+$border-color: rgba(62, 140, 81, 0.25); // Subtle green-tinted border
+$border-focus: #F2E205; // Vibrant Golden Yellow focus glow
+
+// 3. ACCENTS, BUTTONS & GRADIENTS
+$accent-gradient: linear-gradient(135deg, #F2E205 0%, #F2A007 100%); // Yellow to Amber Orange button gradient
+$accent-hover: linear-gradient(135deg, #F9E806 0%, #E09000 100%);
+
+// 4. TEXT COLORS
+$text-light: #F8FAFC; // For the dark page background
+$text-dark: #0D0D0D; // High-contrast dark text for the ice-blue/green cards
+$text-muted: #374151; // Secondary dark gray text for labels/placeholders
+$accent-green: #3E8C51; // Professional Green for icons
+
+html,
+body,
+#root {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background: $bg-gradient;
+    color: $text-light;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+.home {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    box-sizing: border-box;
+
+    .interview-group {
+        width: 100%;
+        max-width: 1100px;
+        background: $bg-card;
+        border: 1px solid $border-color;
+        border-radius: 16px;
+        padding: 2.5rem;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        display: grid;
+        grid-template-columns: 1.2fr 1fr;
+        gap: 2rem;
+        position: relative;
+        color: $text-dark;
+
+        @media (max-width: 900px) {
+            grid-template-columns: 1fr;
+            padding: 1.5rem;
+        }
+
+        .notice-banner {
+            grid-column: 1 / -1;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: rgba(242, 226, 5, 0.2);
+            border: 1px solid rgba(242, 226, 5, 0.4);
+            padding: 0.85rem 1.2rem;
+            border-radius: 8px;
+            color: $text-dark;
+            font-size: 0.95rem;
+
+            .notice-icon {
+                color: #A39302;
+                width: 20px;
+                height: 20px;
+                flex-shrink: 0;
+            }
+
+            p {
+                margin: 0;
+                font-weight: 500;
+            }
+        }
+
+        .group-header,
+        .label-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+
+            .header-icon {
+                color: $accent-green;
+                width: 18px;
+                height: 18px;
+            }
+
+            h3,
+            label {
+                font-size: 0.95rem;
+                font-weight: 600;
+                color: $text-muted;
+                letter-spacing: 0.3px;
+                margin: 0;
+            }
+        }
+
+        .left {
+            display: flex;
+            flex-direction: column;
+
+            textarea {
+                width: 100%;
+                height: 100%;
+                min-height: 320px;
+                background-color: $bg-input;
+                border: 1px solid $border-color;
+                border-radius: 10px;
+                padding: 1rem;
+                color: $text-dark;
+                font-size: 0.95rem;
+                resize: vertical;
+                box-sizing: border-box;
+                transition: all 0.3s ease;
+
+                &::placeholder {
+                    color: rgba(55, 65, 81, 0.5);
+                }
+
+                &:focus {
+                    outline: none;
+                    border-color: $border-focus;
+                    box-shadow: 0 0 0 3px rgba(242, 226, 5, 0.25);
+                }
+            }
+        }
+
+        .right {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            justify-content: space-between;
+
+            .input-grpup {
+                display: flex;
+                flex-direction: column;
+
+                .file-label {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 0.75rem;
+                    background-color: $bg-input;
+                    border: 2px dashed rgba(62, 140, 81, 0.4);
+                    padding: 1.2rem;
+                    border-radius: 10px;
+                    cursor: pointer;
+                    color: $text-muted;
+                    font-weight: 500;
+                    transition: all 0.3s ease;
+
+                    .icon {
+                        color: $accent-green;
+                        width: 22px;
+                        height: 22px;
+                    }
+
+                    &:hover {
+                        border-color: $border-focus;
+                        background-color: rgba(242, 226, 5, 0.1);
+                        color: $text-dark;
+                    }
+                }
+            }
+
+            .input-group {
+                display: flex;
+                flex-direction: column;
+
+                textarea {
+                    width: 100%;
+                    min-height: 120px;
+                    background-color: $bg-input;
+                    border: 1px solid $border-color;
+                    border-radius: 10px;
+                    padding: 1rem;
+                    color: $text-dark;
+                    font-size: 0.95rem;
+                    resize: vertical;
+                    box-sizing: border-box;
+                    transition: all 0.3s ease;
+
+                    &::placeholder {
+                        color: rgba(55, 65, 81, 0.5);
+                    }
+
+                    &:focus {
+                        outline: none;
+                        border-color: $border-focus;
+                        box-shadow: 0 0 0 3px rgba(242, 226, 5, 0.25);
+                    }
+                }
+            }
+
+            .generate-btn {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 0.6rem;
+                background: $accent-gradient;
+                color: $text-dark;
+                border: none;
+                padding: 0.95rem 1.5rem;
+                font-size: 1rem;
+                font-weight: 700;
+                border-radius: 10px;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                box-shadow: 0 4px 15px rgba(242, 160, 7, 0.3);
+
+                .icon {
+                    width: 18px;
+                    height: 18px;
+                }
+
+                &:hover {
+                    background: $accent-hover;
+                    transform: translateY(-2px);
+                    box-shadow: 0 6px 20px rgba(242, 160, 7, 0.4);
+                }
+
+                &:active {
+                    transform: translateY(0);
+                }
+            }
+        }
+    }
+}

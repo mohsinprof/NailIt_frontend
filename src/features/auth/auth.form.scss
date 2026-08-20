@@ -1,36 +1,84 @@
-main{
+// ==========================================
+// AUTH / FORM STYLESHEET (Updated)
+// ==========================================
+
+$bg-gradient: linear-gradient(135deg, #163E8C 0%, #0D0D0D 100%);
+$bg-card: linear-gradient(135deg, #D0E9F2 0%, #C2E2D6 100%); // Ice-blue to soft green card gradient
+$text-dark: #0D0D0D;
+$text-muted: #374151;
+$border-color: rgba(62, 140, 81, 0.25);
+$border-focus: #F2E205; // Vibrant Golden Yellow focus glow
+$accent-orange: #F2A007; // Rich Amber for links
+$accent-green: #3E8C51; // Professional Green for link hover
+
+main {
     min-height: 100vh;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    .form-container{
-        min-width:350px;
-        display:flex;
+    background-image: url(../interview/styles/kimdaejeung-waterlily-8007670.jpg); // Main deep blue-to-black background
+      background-size: cover;
+      backface-visibility: 20%;
+    .form-container {
+        min-width: 350px;
+        max-width: 420px;
+        width: 100%;
+        display: flex;
         flex-direction: column;
         gap: 1rem;
+        background: $bg-card; // Styled to match your app's card theme
+        padding: 2.5rem;
+        border-radius: 16px;
+        border: 1px solid $border-color;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        color: $text-dark;
     }
-    form{
+
+    form {
         display: flex;
         flex-direction: column;
         gap: 0.7rem;
     }
+
     .input-group {
         display: flex;
         flex-direction: column;
         margin-bottom: 0.78rem;
-        input{
-            border: none;
+
+        input {
+            border: 1px solid $border-color;
             outline: none;
             padding-inline: 1rem;
-            padding-block: 0.5rem;
+            padding-block: 0.75rem;
             border-radius: 0.5rem;
-            color: rgb(83, 2, 2);
+            background-color: #FFFFFF; // Clean white input background
+            color: $text-dark; // High-contrast text color
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+
+            &::placeholder {
+                color: rgba(55, 65, 81, 0.5);
+            }
+
+            &:focus {
+                border-color: $border-focus;
+                box-shadow: 0 0 0 3px rgba(242, 226, 5, 0.25);
+            }
         }
     }
-        .link {
-            text-decoration: none;
-            margin: 10px;
-            color: rgb(0, 166, 255);
+
+    .link {
+        text-decoration: none;
+        margin: 10px 0;
+        color: $accent-orange; // Updated from bright blue to match your accent palette
+        font-weight: 600;
+        font-size: 0.9rem;
+        transition: color 0.2s ease;
+
+        &:hover {
+            color: $accent-green; // Shifts to professional green on hover
+            text-decoration: underline;
         }
+    }
 }

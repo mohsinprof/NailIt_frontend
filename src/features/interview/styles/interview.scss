@@ -1,0 +1,433 @@
+// ==========================================
+// NAILIT - INTERVIEW REPORT STYLESHEET
+// ==========================================
+
+// Color Palette Variables (Your Custom Scheme)
+$bg-main: #0D0D0D;
+$bg-gradient: linear-gradient(135deg, #163E8C 0%, #0D0D0D 100%);
+$bg-card: linear-gradient(135deg, #D0E9F2 0%, #C2E2D6 100%); // Ice-blue to soft green card gradient
+$bg-card-dark: #121824; // Secondary dark container background for nested items
+$bg-input: #FFFFFF; // Clean white background for inputs/tags
+$border-color: rgba(62, 140, 81, 0.25);
+$border-focus: #F2E205; // Vibrant Golden Yellow
+$accent-gradient: linear-gradient(135deg, #F2E205 0%, #F2A007 100%); // Yellow to Amber Orange
+$text-dark: #0D0D0D; // High-contrast dark text for light cards
+$text-light: #F8FAFC; // Light text for dark page background
+$text-muted: #374151; // Muted dark text for descriptions
+$accent-green: #3E8C51; // Professional Green for success/low severity
+$accent-orange: #F2A007; // Rich Amber for medium severity
+
+.interview-report-page {
+    width: 100%;
+    min-height: 100vh;
+    background: $bg-gradient;
+    color: $text-light;
+    padding: 2.5rem 1.5rem;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+
+    .report-container {
+        width: 100%;
+        max-width: 1200px;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+
+        // Top Header Section
+        .report-header {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+
+            .brand-badge-large {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.75rem;
+                background: rgba(242, 226, 5, 0.1);
+                border: 1px solid rgba(242, 226, 5, 0.3);
+                padding: 0.6rem 1.2rem;
+                border-radius: 25px;
+                color: #F2E205;
+                align-self: flex-start;
+
+                .brand-icon {
+                    width: 22px;
+                    height: 22px;
+                }
+
+                h1 {
+                    margin: 0;
+                    font-size: 1.5rem;
+                    font-weight: 700;
+                    letter-spacing: 0.5px;
+                    color: $text-light;
+                }
+            }
+
+            .score-overview-card {
+                background: $bg-card;
+                border: 1px solid $border-color;
+                border-radius: 16px;
+                padding: 2rem;
+                display: flex;
+                align-items: center;
+                gap: 2rem;
+                box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+                color: $text-dark;
+
+                @media (max-width: 768px) {
+                    flex-direction: column;
+                    text-align: center;
+                }
+
+                .score-badge-circle {
+                    width: 110px;
+                    height: 110px;
+                    border-radius: 50%;
+                    background: $accent-gradient;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    flex-shrink: 0;
+                    box-shadow: 0 8px 20px rgba(242, 160, 7, 0.3);
+
+                    .score-number {
+                        font-size: 1.8rem;
+                        font-weight: 700;
+                        color: $text-dark;
+                        line-height: 1;
+                    }
+
+                    .score-label {
+                        font-size: 0.75rem;
+                        text-transform: uppercase;
+                        letter-spacing: 1px;
+                        color: rgba(13, 13, 13, 0.8);
+                        margin-top: 4px;
+                        font-weight: 600;
+                    }
+                }
+
+                .score-details {
+                    h2 {
+                        margin: 0 0 0.5rem 0;
+                        font-size: 1.4rem;
+                        color: $text-dark;
+                    }
+
+                    p {
+                        margin: 0;
+                        font-size: 0.95rem;
+                        color: $text-muted;
+                        line-height: 1.5;
+                    }
+                }
+            }
+        }
+
+        // Main Grid: Left Sidebar + Center Workspace
+        .report-main-grid {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 2rem;
+
+            @media (max-width: 900px) {
+                grid-template-columns: 1fr;
+            }
+
+            // Left Sidebar (Skill Gaps)
+            .sidebar-left {
+                .skill-gaps-card {
+                    background: $bg-card;
+                    border: 1px solid $border-color;
+                    border-radius: 14px;
+                    padding: 1.5rem;
+                    position: sticky;
+                    top: 2rem;
+                    color: $text-dark;
+
+                    .section-title {
+                        display: flex;
+                        align-items: center;
+                        gap: 0.6rem;
+                        margin-bottom: 1.2rem;
+
+                        .section-icon {
+                            color: $accent-green;
+                            width: 20px;
+                            height: 20px;
+                        }
+
+                        h3 {
+                            margin: 0;
+                            font-size: 1.05rem;
+                            color: $text-dark;
+                        }
+                    }
+
+                    .skills-tags {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 0.75rem;
+
+                        .skill-tag {
+                            display: flex;
+                            align-items: center;
+                            justify-content: space-between;
+                            background-color: $bg-input;
+                            border: 1px solid $border-color;
+                            padding: 0.7rem 1rem;
+                            border-radius: 8px;
+                            font-size: 0.9rem;
+
+                            span {
+                                color: $text-dark;
+                                font-weight: 500;
+                            }
+
+                            .severity-badge {
+                                font-size: 0.7rem;
+                                text-transform: uppercase;
+                                padding: 0.15rem 0.5rem;
+                                border-radius: 4px;
+                                font-weight: 700;
+                            }
+
+                            &.severity-high .severity-badge {
+                                background-color: rgba(242, 160, 7, 0.2);
+                                color: $accent-orange;
+                            }
+
+                            &.severity-medium .severity-badge {
+                                background-color: rgba(242, 226, 5, 0.25);
+                                color: #8A7302;
+                            }
+
+                            &.severity-low .severity-badge {
+                                background-color: rgba(62, 140, 81, 0.2);
+                                color: $accent-green;
+                            }
+                        }
+                    }
+                }
+            }
+
+            // Center Workspace
+            .workspace-center {
+                display: flex;
+                flex-direction: column;
+                gap: 1.5rem;
+
+                .report-tabs {
+                    display: flex;
+                    gap: 0.75rem;
+                    background: $bg-card;
+                    padding: 0.5rem;
+                    border-radius: 12px;
+                    border: 1px solid $border-color;
+
+                    @media (max-width: 600px) {
+                        flex-direction: column;
+                    }
+
+                    .tab-btn {
+                        flex: 1;
+                        background: transparent;
+                        border: none;
+                        color: $text-muted;
+                        font-size: 0.95rem;
+                        font-weight: 600;
+                        padding: 0.75rem 1rem;
+                        border-radius: 8px;
+                        cursor: pointer;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        gap: 0.5rem;
+                        transition: all 0.2s ease;
+
+                        .tab-icon {
+                            width: 18px;
+                            height: 18px;
+                        }
+
+                        &:hover {
+                            color: $text-dark;
+                            background-color: rgba(242, 226, 5, 0.2);
+                        }
+
+                        &.active {
+                            color: $text-dark;
+                            background: $accent-gradient;
+                            box-shadow: 0 4px 12px rgba(242, 160, 7, 0.3);
+                        }
+                    }
+                }
+
+                .tab-content-box {
+
+                    // Questions List Style
+                    .questions-list {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 1rem;
+
+                        .q-card {
+                            background: $bg-card;
+                            border: 1px solid $border-color;
+                            border-radius: 12px;
+                            overflow: hidden;
+                            transition: border-color 0.2s ease;
+                            color: $text-dark;
+
+                            &:hover {
+                                border-color: $accent-green;
+                            }
+
+                            .q-header {
+                                padding: 1.25rem 1.5rem;
+                                display: flex;
+                                justify-content: space-between;
+                                align-items: center;
+                                cursor: pointer;
+                                user-select: none;
+
+                                .q-title-wrapper {
+                                    display: flex;
+                                    align-items: center;
+                                    gap: 1rem;
+
+                                    .q-number {
+                                        background-color: $bg-input;
+                                        color: $accent-green;
+                                        font-weight: 700;
+                                        font-size: 0.85rem;
+                                        padding: 0.3rem 0.6rem;
+                                        border-radius: 6px;
+                                        border: 1px solid $border-color;
+                                    }
+
+                                    h4 {
+                                        margin: 0;
+                                        font-size: 1rem;
+                                        color: $text-dark;
+                                        font-weight: 600;
+                                    }
+                                }
+
+                                svg {
+                                    color: $text-muted;
+                                    width: 20px;
+                                    height: 20px;
+                                }
+                            }
+
+                            .q-body {
+                                padding: 0 1.5rem 1.5rem 1.5rem;
+                                display: flex;
+                                flex-direction: column;
+                                gap: 1rem;
+                                border-top: 1px solid $border-color;
+                                background-color: rgba(255, 255, 255, 0.4);
+
+                                .intention-box,
+                                .answer-box {
+                                    margin-top: 1rem;
+
+                                    strong {
+                                        display: block;
+                                        font-size: 0.85rem;
+                                        text-transform: uppercase;
+                                        letter-spacing: 0.5px;
+                                        color: $accent-green;
+                                        margin-bottom: 0.3rem;
+                                    }
+
+                                    p {
+                                        margin: 0;
+                                        font-size: 0.95rem;
+                                        color: $text-muted;
+                                        line-height: 1.5;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    // Preparation Plan Timeline
+                    .prep-timeline {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 1.25rem;
+
+                        .prep-day-card {
+                            background: $bg-card;
+                            border: 1px solid $border-color;
+                            border-radius: 12px;
+                            padding: 1.5rem;
+                            display: flex;
+                            gap: 1.5rem;
+                            color: $text-dark;
+
+                            @media (max-width: 600px) {
+                                flex-direction: column;
+                            }
+
+                            .day-badge {
+                                background: $accent-gradient;
+                                color: $text-dark;
+                                font-weight: 700;
+                                font-size: 0.9rem;
+                                padding: 0.5rem 1rem;
+                                border-radius: 8px;
+                                height: fit-content;
+                                box-shadow: 0 4px 10px rgba(242, 160, 7, 0.3);
+                            }
+
+                            .day-content {
+                                flex: 1;
+
+                                h4 {
+                                    margin: 0 0 1rem 0;
+                                    font-size: 1.1rem;
+                                    color: $text-dark;
+                                    font-weight: 600;
+                                }
+
+                                .task-list {
+                                    list-style: none;
+                                    padding: 0;
+                                    margin: 0;
+                                    display: flex;
+                                    flex-direction: column;
+                                    gap: 0.75rem;
+
+                                    li {
+                                        display: flex;
+                                        align-items: center;
+                                        gap: 0.75rem;
+                                        font-size: 0.95rem;
+                                        color: $text-muted;
+
+                                        .task-check {
+                                            color: $accent-green;
+                                            width: 18px;
+                                            height: 18px;
+                                            flex-shrink: 0;
+                                        }
+
+                                        span {
+                                            color: $text-dark;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
