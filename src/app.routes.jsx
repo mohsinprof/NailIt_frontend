@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter} from "react-router-dom";
 import Login from "./features/auth/pages/Login";
 import Register from "./features/auth/pages/Register";
 import NotFound from "./features/auth/pages/NotFound";
@@ -6,6 +6,10 @@ import Protected from "./features/auth/components/Protected";
 import Layout from "./features/auth/Layout";
 import Home from "./features/interview/pages/Home";
 import Interview from "./features/interview/pages/Interview";
+import MakeFreshResumeForm from "./features/makeFreshResume/pages/MakeFreshResume";
+
+
+
 
 export const router = createBrowserRouter([
     {
@@ -16,8 +20,16 @@ export const router = createBrowserRouter([
                 element: <Protected><Home /></Protected>,
             },
             {
-                path: "/interview",
+                path: "/interview/:interviewId",
                 element:<Protected><Interview /></Protected>
+            },
+            {
+                path: "/make-fresh-resume",
+                element:<Protected>
+
+                 < MakeFreshResumeForm />
+                </Protected>
+                   
             },
             {
                 path: "/login",

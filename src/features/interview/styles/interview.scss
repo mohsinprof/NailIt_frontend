@@ -2,20 +2,25 @@
 // NAILIT - INTERVIEW REPORT STYLESHEET
 // ==========================================
 
-// Color Palette Variables (Your Custom Scheme)
+@use "sass:color"; // FIX: Import color module for Dart Sass 3.0.0
+
+// Color Palette Variables
 $bg-main: #0D0D0D;
 $bg-gradient: linear-gradient(135deg, #163E8C 0%, #0D0D0D 100%);
-$bg-card: linear-gradient(135deg, #D0E9F2 0%, #C2E2D6 100%); // Ice-blue to soft green card gradient
-$bg-card-dark: #121824; // Secondary dark container background for nested items
-$bg-input: #FFFFFF; // Clean white background for inputs/tags
+$bg-card: linear-gradient(135deg, #D0E9F2 0%, #C2E2D6 100%);
+$bg-input: #FFFFFF;
 $border-color: rgba(62, 140, 81, 0.25);
-$border-focus: #F2E205; // Vibrant Golden Yellow
-$accent-gradient: linear-gradient(135deg, #F2E205 0%, #F2A007 100%); // Yellow to Amber Orange
-$text-dark: #0D0D0D; // High-contrast dark text for light cards
-$text-light: #F8FAFC; // Light text for dark page background
-$text-muted: #374151; // Muted dark text for descriptions
-$accent-green: #3E8C51; // Professional Green for success/low severity
-$accent-orange: #F2A007; // Rich Amber for medium severity
+$accent-gradient: linear-gradient(135deg, #F2E205 0%, #F2A007 100%);
+$text-dark: #0D0D0D;
+$text-light: #F8FAFC;
+$text-muted: #374151;
+$accent-green: #3E8C51;
+$accent-orange: #F2A007;
+
+// Dynamic Score Colors
+$score-high: #10B981; // Emerald
+$score-medium: #F59E0B; // Amber
+$score-low: #EF4444; // Red
 
 .interview-report-page {
     width: 100%;
@@ -81,22 +86,22 @@ $accent-orange: #F2A007; // Rich Amber for medium severity
                     text-align: center;
                 }
 
+                // Dynamic Score Badge Colors
                 .score-badge-circle {
                     width: 110px;
                     height: 110px;
                     border-radius: 50%;
-                    background: $accent-gradient;
                     display: flex;
                     flex-direction: column;
                     align-items: center;
                     justify-content: center;
                     flex-shrink: 0;
-                    box-shadow: 0 8px 20px rgba(242, 160, 7, 0.3);
+                    transition: all 0.3s ease;
 
                     .score-number {
                         font-size: 1.8rem;
                         font-weight: 700;
-                        color: $text-dark;
+                        color: #fff; // Changed to white for better contrast on colors
                         line-height: 1;
                     }
 
@@ -104,17 +109,55 @@ $accent-orange: #F2A007; // Rich Amber for medium severity
                         font-size: 0.75rem;
                         text-transform: uppercase;
                         letter-spacing: 1px;
-                        color: rgba(13, 13, 13, 0.8);
+                        color: rgba(255, 255, 255, 0.9);
                         margin-top: 4px;
                         font-weight: 600;
+                    }
+
+                    // FIX: Replaced darken() with color.adjust()
+                    &.score-high {
+                        background: linear-gradient(135deg, $score-high 0%, color.adjust($score-high, $lightness: -10%) 100%);
+                        box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4);
+                    }
+
+                    &.score-medium {
+                        background: linear-gradient(135deg, $score-medium 0%, color.adjust($score-medium, $lightness: -10%) 100%);
+                        box-shadow: 0 8px 20px rgba(245, 158, 11, 0.4);
+                    }
+
+                    &.score-low {
+                        background: linear-gradient(135deg, $score-low 0%, color.adjust($score-low, $lightness: -10%) 100%);
+                        box-shadow: 0 8px 20px rgba(239, 68, 68, 0.4);
                     }
                 }
 
                 .score-details {
-                    h2 {
-                        margin: 0 0 0.5rem 0;
-                        font-size: 1.4rem;
-                        color: $text-dark;
+                    flex: 1;
+
+                    .title-row {
+                        display: flex;
+                        align-items: center;
+                        gap: 1rem;
+                        margin-bottom: 0.5rem;
+                        flex-wrap: wrap;
+
+                        h2 {
+                            margin: 0;
+                            font-size: 1.4rem;
+                            color: $text-dark;
+                        }
+
+                        .match-level-badge {
+                            display: inline-flex;
+                            align-items: center;
+                            gap: 0.3rem;
+                            font-size: 0.75rem;
+                            font-weight: 700;
+                            padding: 0.2rem 0.6rem;
+                            border-radius: 12px;
+                            text-transform: uppercase;
+                            letter-spacing: 0.5px;
+                        }
                     }
 
                     p {
@@ -122,6 +165,39 @@ $accent-orange: #F2A007; // Rich Amber for medium severity
                         font-size: 0.95rem;
                         color: $text-muted;
                         line-height: 1.5;
+                    }
+
+                    .report-actions {
+                        margin-top: 1rem;
+                        display: flex;
+                        flex-wrap: wrap;
+                        gap: 0.75rem;
+
+                        .pdf-download-btn {
+                            display: inline-flex;
+                            align-items: center;
+                            gap: 0.5rem;
+                            border: none;
+                            border-radius: 999px;
+                            padding: 0.85rem 1.2rem;
+                            font-size: 0.9rem;
+                            font-weight: 700;
+                            cursor: pointer;
+                            color: #0D0D0D;
+                            background: linear-gradient(135deg, #F2E205 0%, #F2A007 100%);
+                            box-shadow: 0 10px 24px rgba(242, 160, 7, 0.25);
+                            transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+
+                            &:hover:not(:disabled) {
+                                transform: translateY(-1px);
+                                box-shadow: 0 14px 28px rgba(242, 160, 7, 0.3);
+                            }
+
+                            &:disabled {
+                                cursor: not-allowed;
+                                opacity: 0.7;
+                            }
+                        }
                     }
                 }
             }
@@ -137,7 +213,7 @@ $accent-orange: #F2A007; // Rich Amber for medium severity
                 grid-template-columns: 1fr;
             }
 
-            // Left Sidebar (Skill Gaps)
+            // Left Sidebar
             .sidebar-left {
                 .skill-gaps-card {
                     background: $bg-card;
@@ -147,6 +223,7 @@ $accent-orange: #F2A007; // Rich Amber for medium severity
                     position: sticky;
                     top: 2rem;
                     color: $text-dark;
+                    backdrop-filter: blur(4px);
 
                     .section-title {
                         display: flex;
@@ -196,18 +273,35 @@ $accent-orange: #F2A007; // Rich Amber for medium severity
                             }
 
                             &.severity-high .severity-badge {
-                                background-color: rgba(242, 160, 7, 0.2);
-                                color: $accent-orange;
+                                background-color: rgba(239, 68, 68, 0.15);
+                                color: $score-low;
                             }
 
                             &.severity-medium .severity-badge {
-                                background-color: rgba(242, 226, 5, 0.25);
-                                color: #8A7302;
+                                background-color: rgba(245, 158, 11, 0.15);
+                                color: $score-medium;
                             }
 
                             &.severity-low .severity-badge {
-                                background-color: rgba(62, 140, 81, 0.2);
-                                color: $accent-green;
+                                background-color: rgba(16, 185, 129, 0.15);
+                                color: $score-high;
+                            }
+                        }
+
+                        // Fallback if no gaps
+                        .no-gaps {
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+                            text-align: center;
+                            gap: 0.5rem;
+                            color: $accent-green;
+                            padding: 1rem;
+
+                            p {
+                                margin: 0;
+                                font-size: 0.85rem;
+                                color: $text-muted;
                             }
                         }
                     }
@@ -222,22 +316,19 @@ $accent-orange: #F2A007; // Rich Amber for medium severity
 
                 .report-tabs {
                     display: flex;
-                    gap: 0.75rem;
-                    background: $bg-card;
+                    gap: 0.5rem;
+                    background: rgba(255, 255, 255, 0.1);
+                    backdrop-filter: blur(10px);
                     padding: 0.5rem;
                     border-radius: 12px;
-                    border: 1px solid $border-color;
-
-                    @media (max-width: 600px) {
-                        flex-direction: column;
-                    }
+                    border: 1px solid rgba(255, 255, 255, 0.1);
 
                     .tab-btn {
                         flex: 1;
                         background: transparent;
                         border: none;
-                        color: $text-muted;
-                        font-size: 0.95rem;
+                        color: rgba(255, 255, 255, 0.7);
+                        font-size: 0.9rem;
                         font-weight: 600;
                         padding: 0.75rem 1rem;
                         border-radius: 8px;
@@ -254,8 +345,8 @@ $accent-orange: #F2A007; // Rich Amber for medium severity
                         }
 
                         &:hover {
-                            color: $text-dark;
-                            background-color: rgba(242, 226, 5, 0.2);
+                            color: $text-light;
+                            background-color: rgba(255, 255, 255, 0.1);
                         }
 
                         &.active {
@@ -279,11 +370,11 @@ $accent-orange: #F2A007; // Rich Amber for medium severity
                             border: 1px solid $border-color;
                             border-radius: 12px;
                             overflow: hidden;
-                            transition: border-color 0.2s ease;
+                            transition: all 0.2s ease;
                             color: $text-dark;
 
                             &:hover {
-                                border-color: $accent-green;
+                                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
                             }
 
                             .q-header {
@@ -338,7 +429,7 @@ $accent-orange: #F2A007; // Rich Amber for medium severity
 
                                     strong {
                                         display: block;
-                                        font-size: 0.85rem;
+                                        font-size: 0.8rem;
                                         text-transform: uppercase;
                                         letter-spacing: 0.5px;
                                         color: $accent-green;
@@ -409,7 +500,6 @@ $accent-orange: #F2A007; // Rich Amber for medium severity
                                         align-items: center;
                                         gap: 0.75rem;
                                         font-size: 0.95rem;
-                                        color: $text-muted;
 
                                         .task-check {
                                             color: $accent-green;
@@ -423,6 +513,25 @@ $accent-orange: #F2A007; // Rich Amber for medium severity
                                         }
                                     }
                                 }
+                            }
+                        }
+
+                        .no-gaps {
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+                            text-align: center;
+                            gap: 1rem;
+                            background: $bg-card;
+                            padding: 3rem;
+                            border-radius: 12px;
+                            color: $accent-green;
+
+                            p {
+                                margin: 0;
+                                font-size: 1.1rem;
+                                color: $text-dark;
+                                font-weight: 500;
                             }
                         }
                     }
