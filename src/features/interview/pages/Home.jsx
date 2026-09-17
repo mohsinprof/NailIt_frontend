@@ -181,7 +181,7 @@ export default function Home() {
                                         title="Delete report"
                                         onClick={(e) => handleDeleteReport(e, report._id)}
                                     >
-                                        <X size={14} />
+                                        <X size={15} />
                                     </button>
                                     {/* === DELETE REPORT - END === */}
 
