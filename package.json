@@ -1,5 +1,5 @@
 {
-  "name": "genai_fronted",
+  "name": "NailIt_frontend",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -34,13 +34,13 @@
   "main": "eslint.config.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mohsinprof/genai_frontend.git"
+    "url": "git+https://github.com/mohsinprof/NailIt_frontend.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/mohsinprof/genai_frontend/issues"
+    "url": "https://github.com/mohsinprof/NailIt_frontend/issues"
   },
-  "homepage": "https://github.com/mohsinprof/genai_frontend#readme"
+  "homepage": "https://github.com/mohsinprof/NailIt_frontend#readme"
 }

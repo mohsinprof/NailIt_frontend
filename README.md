@@ -1,7 +1,7 @@
 # AI Interview Coach — Frontend
 
 React + Vite frontend for an AI-powered interview preparation platform.
-It pairs with the backend repo (`genai_backend`), which serves the REST API.
+It pairs with the backend repo (`NailIt_backend`), which serves the REST API.
 
 ## Features
 
