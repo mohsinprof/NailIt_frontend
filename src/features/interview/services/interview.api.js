@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-    baseURL: "https://150.136.170.112.sslip.io",
+    baseURL: 'import.meta.env.VITE_API_URL || http://localhost:3000',
     withCredentials: true
 });
 

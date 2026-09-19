@@ -3,7 +3,7 @@ import axios from 'axios';
 
 // 1. Create the exact same Axios instance with withCredentials: true
 const api = axios.create({
-    baseURL: "https://150.136.170.112.sslip.io",
+    baseURL: "import.meta.env.VITE_API_URL || http://localhost:3000",
     withCredentials: true
 });
 
