@@ -103,7 +103,7 @@ export default function Home() {
                     <textarea 
                         onChange={(e) => SetJobDescription(e.target.value)}
                         name='jobDescription' 
-                        placeholder='Enter job description here.....'
+                        placeholder='Enter  job description here.....'
                     ></textarea>
                 </div>
 
