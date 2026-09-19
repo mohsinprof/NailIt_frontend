@@ -399,3 +399,19 @@ body,
         }
     }
 }
+// MOBILE POLISH
+@media (max-width: 700px) {
+    .home {
+        justify-content: flex-start;   // stop content floating mid-screen
+        padding: 1.25rem;
+        gap: 1.25rem;
+    }
+
+    .home .interview-group {
+        padding: 1.25rem;
+    }
+
+    .home .interview-group .left textarea {
+        min-height: 180px;             // 320px is huge on a phone
+    }
+}

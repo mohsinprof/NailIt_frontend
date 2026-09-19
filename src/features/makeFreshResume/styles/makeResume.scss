@@ -403,3 +403,13 @@ $danger-color: #EF4444;
     }
 }
 
+// MOBILE POLISH
+@media (max-width: 480px) {
+    .make-fresh-resume-form {
+        padding: 1.25rem 1rem;
+    }
+
+    .make-fresh-resume-form .form-header h1 {
+        font-size: 1.6rem;
+    }
+}

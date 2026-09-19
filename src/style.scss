@@ -23,3 +23,19 @@ body,
     color: $text-main; // Clean, bright foreground text
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
 }
+
+// ==========================================
+// MOBILE POLISH
+// ==========================================
+
+html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
+// iOS Safari zooms the page when an input is < 16px — this stops the zoom-jump
+@media (max-width: 640px) {
+    input, textarea, select {
+        font-size: 16px !important;
+    }
+}

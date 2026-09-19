@@ -540,3 +540,19 @@ $score-low: #EF4444; // Red
         }
     }
 }
+// MOBILE POLISH
+@media (max-width: 480px) {
+    .interview-report-page {
+        padding: 1rem 0.75rem;
+    }
+
+    .interview-report-page .report-container {
+        gap: 1.25rem;
+        overflow-wrap: break-word;     // long words never cause sideways scroll
+    }
+
+    .interview-report-page .report-container .report-header .score-overview-card {
+        padding: 1.25rem;
+        gap: 1.25rem;
+    }
+}
