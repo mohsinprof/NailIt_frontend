@@ -1,0 +1,35 @@
+// Amber "ghost" style — works on dark page bg and light cards
+.logout-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    flex-shrink: 0;
+    padding: 0.65rem 1.2rem;
+    font-size: 0.85rem;
+    font-weight: 700;
+    border-radius: 8px;
+    cursor: pointer;
+    background: rgba(242, 226, 5, 0.12); // Subtle yellow tint
+    border: 1px solid rgba(242, 226, 5, 0.45); // Yellow border
+    color: #089db7; // Vibrant Golden Yellow text
+    transition: all 0.3s ease;
+    text-decoration: none;
+
+    &:hover:not(:disabled) {
+        background: linear-gradient(135deg, #F2E205 0%, #F2A007 100%); // Replaced variable
+        border-color: #F2A007;
+        color: #0D0D0D; // Replaced variable
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(242, 160, 7, 0.35);
+    }
+
+    &:active:not(:disabled) { 
+        transform: translateY(0); 
+    }
+    
+    &:disabled { 
+        opacity: 0.6; 
+        cursor: not-allowed; 
+    }
+}

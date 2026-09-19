@@ -41,12 +41,14 @@ export const useAuth = () => {
         }
     };
 
-    const handleLogout = async () => {
+        const handleLogout = async () => {
         setIsLoading(true);
         await logout();
         setUser(null);
         setIsLoading(false);
+        navigate("/login");
     };
+
 
     const handleGetMe = async () => {
         setIsLoading(true);

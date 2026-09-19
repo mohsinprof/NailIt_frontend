@@ -1,4 +1,6 @@
 import React, { useState, useRef } from 'react';
+import LogoutButton from '../../auth/components/LogoutButton';
+
 import {
     Upload,
     X,
@@ -289,6 +291,8 @@ const handleSaveToLibrary = async () => {
                     <ArrowLeft size={16} />
                     Back to Home
                 </button>
+                                <LogoutButton />
+
             <div className="form-header">
                 <h1>Make Fresh Resume</h1>
                 <p className="form-subtitle">

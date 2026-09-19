@@ -2,6 +2,8 @@ import React, { useEffect, useState, useRef } from 'react'
 import { FileText, UploadCloud, User, Sparkles, Info, CheckCircle2 } from 'lucide-react'
 import "../styles/home.scss"
 import { useInterview } from '../hooks/useInterview.js'
+import LogoutButton from '../../auth/components/LogoutButton'
+
 import { useNavigate, Link } from 'react-router-dom'
 import Loading from '../../auth/pages/Loading'
 // === DELETE REPORT - START (delete these blocks to remove the feature) ===
@@ -93,6 +95,10 @@ export default function Home() {
                     <Sparkles size={14} />
                     Make Fresh Resume
                 </button>
+                                {/* === LOGOUT BUTTON - START === */}
+                <LogoutButton />
+                {/* === LOGOUT BUTTON - END === */}
+
                 </div>
 
                 <div className='left'>
