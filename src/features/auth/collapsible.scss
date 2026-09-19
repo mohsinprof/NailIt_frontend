@@ -1,0 +1,72 @@
+// ==========================================
+// COLLAPSIBLE — shared accordion
+// ==========================================
+
+.collapsible {
+    &.framed {
+        background: #111827;
+        border: 1px solid #1f2937;
+        border-radius: 14px;
+        overflow: hidden;
+    }
+
+    .collapsible-header {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        text-align: left;
+        color: inherit;
+        font: inherit;
+        padding: 0;
+
+        .collapsible-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .collapsible-badge {
+            background: rgba(139, 92, 246, 0.18);
+            color: #c4b5fd;
+            font-size: 0.72rem;
+            font-weight: 800;
+            padding: 0.2rem 0.55rem;
+            border-radius: 999px;
+            flex-shrink: 0;
+        }
+
+        .collapsible-chevron {
+            margin-left: auto;
+            flex-shrink: 0;
+            opacity: 0.7;
+            transition: transform 0.25s ease;
+        }
+    }
+
+    &.is-open .collapsible-chevron {
+        transform: rotate(180deg);
+    }
+
+    .collapsible-body {
+        padding-top: 1.25rem;
+    }
+
+    // Framed variant (dark card) — used on Home "Recent Reports"
+    &.framed {
+        .collapsible-header {
+            padding: 1rem 1.25rem;
+
+            .collapsible-title {
+                font-size: 1.05rem;
+                color: #f9fafb;
+            }
+        }
+
+        .collapsible-body {
+            padding: 0.25rem 1.25rem 1.25rem;
+        }
+    }
+}

@@ -33,6 +33,13 @@ html {
     text-size-adjust: 100%;
 }
 
+// never let horizontal overflow shift the layout (keeps the navbar's
+// right edge — and the burger button — on screen)
+html,
+body {
+    overflow-x: clip;
+}
+
 // iOS Safari zooms the page when an input is < 16px — this stops the zoom-jump
 @media (max-width: 640px) {
     input, textarea, select {

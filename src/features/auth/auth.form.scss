@@ -12,16 +12,16 @@ $accent-orange: #F2A007; // Rich Amber for links
 $accent-green: #3E8C51; // Professional Green for link hover
 
 main {
-    min-height: 100vh;
+    min-height: auto;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     background-image: url(../../assets/login-bg.jpg); // Login/Register page background
       background-size: cover;
-      backface-visibility: 20%;
-    .form-container {
-        min-width: 350px;
+   padding: 1rem;
+      .form-container {
+        min-width: 0;
         max-width: 420px;
         width: 100%;
         display: flex;

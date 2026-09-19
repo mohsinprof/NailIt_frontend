@@ -154,28 +154,7 @@ const handleSaveTailoredResume = async () => {
   return (
     <main className='interview-report-page'>
       <div className="report-container">
-            <button
-          type="button"
-          onClick={() => navigate('/')}
-          style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '0.4rem',
-            background: 'transparent',
-            color: '#ffd900',
-            border: '1px solid #D1D5DB',
-            padding: '0.4rem 0.9rem',
-            fontSize: '0.85rem',
-            fontWeight: '600',
-            borderRadius: '8px',
-            cursor: 'pointer',
-            marginBottom: '1rem',
-            width:'40%'
-          }}
-        >
-          <ArrowLeft size={16} />
-          Back to Home
-        </button>
+           
             
 
         <header className="report-header">

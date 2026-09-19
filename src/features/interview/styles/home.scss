@@ -35,7 +35,7 @@ body,
 }
 
 .home {
-    min-height: 100vh;
+    min-height: auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -262,34 +262,6 @@ body,
             }
         }
 
-        .fresh-resume-btn {
-            flex: 0 0 auto;
-            align-self: center;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: $accent-gradient;
-            color: $text-dark;
-            border: none;
-            padding: 0.65rem 1.2rem;
-            font-size: 0.85rem;
-            font-weight: 700;
-            border-radius: 8px;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(242, 160, 7, 0.3);
-            transition: all 0.3s ease;
-            text-decoration: none;
-
-            &:hover {
-                background: $accent-hover;
-                transform: translateY(-2px);
-                box-shadow: 0 6px 20px rgba(242, 160, 7, 0.4);
-            }
-
-            &:active {
-                transform: translateY(0);
-            }
-        }
     }
 
     // ==========================================
@@ -412,6 +384,101 @@ body,
     }
 
     .home .interview-group .left textarea {
-        min-height: 180px;             // 320px is huge on a phone
+        min-height: 140px;
     }
+
+    .home .interview-group .notice-banner {
+        padding: 0.6rem 0.9rem;
+        font-size: 0.8rem;
+    }
+
+    // compact Recent Reports on phones
+    .home .recent-reports-section .collapsible .collapsible-header {
+        padding: 0.8rem 1rem;
+
+        .collapsible-title { font-size: 0.95rem; }
+        .collapsible-badge { font-size: 0.62rem; padding: 0.12rem 0.45rem; }
+    }
+
+    .home .recent-reports-section .collapsible .collapsible-body {
+        padding: 0.15rem 1rem 1rem;
+    }
+
+    .home .reports-history-container .report-item .report-link {
+        padding: 0.8rem 1rem !important;
+
+        .report-title { font-size: 0.92rem; }
+        .report-date { font-size: 0.7rem; padding: 0.15rem 0.45rem; }
+    }
+
+    .home .reports-history-container .report-item .report-delete-btn {
+        width: 44px !important;
+    }
+}
+
+// ==========================================
+// MOBILE TABS — Generate / Reports / Resumes
+// ==========================================
+
+.home-tabs {
+    display: none;   // desktop keeps the stacked layout
+}
+
+@media (max-width: 700px) {
+    .home-tabs {
+        display: flex;
+        gap: 0.4rem;
+        position: sticky;
+        top: 53px;                    // sits right under the sticky navbar
+        z-index: 90;
+        max-width: 100%;
+        background: rgba(13, 13, 13, 0.95);
+        padding: 0.4rem;
+        border: 1px solid rgba(242, 226, 5, 0.25);
+        border-radius: 12px;
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+    }
+
+    .home-tab {
+        flex: 1;
+        min-width: 0;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.3rem;
+        padding: 0.5rem 0.3rem;
+        font-size: 0.75rem;
+        font-weight: 700;
+        color: #F8FAFC;
+        background: transparent;
+        border: 1px solid transparent;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+
+        span { white-space: nowrap; }
+
+        .home-tab-badge {
+            background: rgba(139, 92, 246, 0.25);
+            color: #c4b5fd;
+            font-size: 0.65rem;
+            font-weight: 800;
+            padding: 0.1rem 0.4rem;
+            border-radius: 999px;
+        }
+
+        &.is-active {
+            background: linear-gradient(135deg, #F2E205 0%, #F2A007 100%);
+            color: #0D0D0D;
+            box-shadow: 0 4px 14px rgba(242, 160, 7, 0.35);
+        }
+    }
+
+    // Mobile: only the active pane is visible
+    .home .tab-pane { display: none; }
+    .home .tab-pane.is-active { display: block; }
+
+    // The generate card is a grid — restore its layout when visible
+    .home .interview-group.tab-pane.is-active { display: grid; }
 }

@@ -1,11 +1,11 @@
 import React, { useEffect, useState, useRef } from 'react'
-import { FileText, UploadCloud, User, Sparkles, Info, CheckCircle2 } from 'lucide-react'
+import { FileText, UploadCloud, User, Sparkles, Info, CheckCircle2, FileDown } from 'lucide-react'
 import "../styles/home.scss"
 import { useInterview } from '../hooks/useInterview.js'
-import LogoutButton from '../../auth/components/LogoutButton'
 
 import { useNavigate, Link } from 'react-router-dom'
 import Loading from '../../auth/pages/Loading'
+import Collapsible from '../../auth/components/Collapsible'
 // === DELETE REPORT - START (delete these blocks to remove the feature) ===
 import { X } from 'lucide-react'
 // === DELETE REPORT - END ===
@@ -20,6 +20,7 @@ export default function Home() {
     const [jobDescription, SetJobDescription] = useState("")
     const [selfDescription, SetSelfDescrition] = useState("")
     const [uploadedFile, setUploadedFile] = useState(null)
+    const [activeTab, setActiveTab] = useState("generate") // generate | reports | resumes (mobile tabs)
     const resumeInputRef = useRef()
     const navigate = useNavigate()
     
@@ -78,26 +79,29 @@ export default function Home() {
 
     return (
         <main className='home'>
-            <div className="interview-group">
+            {/* MOBILE TABS — switch panes on phones; hidden on desktop via CSS */}
+            <div className="home-tabs">
+                <button type="button" className={`home-tab ${activeTab === "generate" ? "is-active" : ""}`} onClick={() => setActiveTab("generate")}>
+                    <Sparkles size={15} />
+                    <span>Generate</span>
+                </button>
+                <button type="button" className={`home-tab ${activeTab === "reports" ? "is-active" : ""}`} onClick={() => setActiveTab("reports")}>
+                    <FileText size={15} />
+                    <span>Reports</span>
+                    {Array.isArray(reports) && reports.length > 0 && <span className="home-tab-badge">{reports.length}</span>}
+                </button>
+                <button type="button" className={`home-tab ${activeTab === "resumes" ? "is-active" : ""}`} onClick={() => setActiveTab("resumes")}>
+                    <FileDown size={15} />
+                    <span>Resumes</span>
+                </button>
+            </div>
+            <div className={`interview-group tab-pane ${activeTab === "generate" ? "is-active" : ""}`}>
                  <div className="card-header">
 
                 <div className="notice-banner">
                     <Info className="notice-icon" />
                     <p>Upload a resume OR enter a self description. Providing both gives the best results!</p>
                 </div>
-
-                <button 
-                    onClick={() => navigate('/make-fresh-resume')} 
-                        className="fresh-resume-btn"
-
-                 
-                >
-                    <Sparkles size={14} />
-                    Make Fresh Resume
-                </button>
-                                {/* === LOGOUT BUTTON - START === */}
-                <LogoutButton />
-                {/* === LOGOUT BUTTON - END === */}
 
                 </div>
 
@@ -164,14 +168,16 @@ export default function Home() {
                 </div>
             </div>
                 {/* === SAVED RESUMES FEATURE - START (delete this block to remove the feature) === */}
+<div className={`tab-pane ${activeTab === "resumes" ? "is-active" : ""}`}>
 <SavedResumesPanel />
+</div>
 {/* === SAVED RESUMES FEATURE - END === */}
 
-            <div className="reports-history-container">
+            <div className={`reports-history-container tab-pane ${activeTab === "reports" ? "is-active" : ""}`}>
                 {/* Added Array.isArray check to prevent crashes when reports is an object */}
                 {Array.isArray(reports) && reports.length > 0 && (             
                     <section className="recent-reports-section">
-                        <h2>Recent Reports</h2>
+                        <Collapsible title="Recent Reports" badge={String(reports.length)} framed>
                         <ul className="reports-list">
                             {reports.map(report => (
                                 <li key={report._id} className="report-item">
@@ -194,6 +200,7 @@ export default function Home() {
                                 </li>
                             ))}
                         </ul>
+                        </Collapsible>
                     </section>
                 )}
             </div>

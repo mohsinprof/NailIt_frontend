@@ -1,5 +1,4 @@
 import React, { useState, useRef } from 'react';
-import LogoutButton from '../../auth/components/LogoutButton';
 
 import {
     Upload,
@@ -13,7 +12,6 @@ import {
     Award,
     Zap,
     Download,
-    ArrowLeft
 } from 'lucide-react';
 import { generateFreshResume } from '../services/freshResume.api';
 // === SAVED RESUMES FEATURE - START ===
@@ -22,6 +20,7 @@ import ReplaceResumeModal from '../../savedResumes/components/ReplaceResumeModal
 // === SAVED RESUMES FEATURE - END ===
 
 import '../styles/makeResume.scss';
+import Collapsible from '../../auth/components/Collapsible';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -270,29 +269,6 @@ const handleSaveToLibrary = async () => {
 
     return (
         <div className="make-fresh-resume-form">
-               <button
-                    type="button"
-                    onClick={() => navigate('/')}
-                    style={{
-                        display: 'inline-flex',
-                        alignItems: 'center',
-                        gap: '0.4rem',
-                        background: 'transparent',
-                        color: '#ff0000',
-                        border: '1px solid #050c00',
-                        padding: '0.4rem 0.9rem',
-                        fontSize: '0.85rem',
-                        fontWeight: '600',
-                        borderRadius: '8px',
-                        cursor: 'pointer',
-                        marginBottom: '1rem',
-                    }}
-                >
-                    <ArrowLeft size={16} />
-                    Back to Home
-                </button>
-                                <LogoutButton />
-
             <div className="form-header">
                 <h1>Make Fresh Resume</h1>
                 <p className="form-subtitle">
@@ -312,11 +288,12 @@ const handleSaveToLibrary = async () => {
                 {/* LEFT COLUMN: Form fields */}
                 <div className="form-left">
                     {/* Personal Info Section */}
-                    <section className="form-section">
-                        <div className="section-header">
-                            <FileText className="section-icon" />
-                            <h2>Personal Information</h2>
-                        </div>
+<section className="form-section">
+                        <Collapsible
+                            title="Personal Information"
+                            icon={<FileText className="section-icon" />}
+                            defaultOpen
+                        >
                         <div className="form-group">
                             <label>Full Name</label>
                             <input
@@ -365,14 +342,15 @@ const handleSaveToLibrary = async () => {
                                 placeholder="City, State"
                             />
                         </div>
+                        </Collapsible>
                     </section>
 
                     {/* Professional Summary */}
-                    <section className="form-section">
-                        <div className="section-header">
-                            <Briefcase className="section-icon" />
-                            <h2>Professional Summary</h2>
-                        </div>
+<section className="form-section">
+                        <Collapsible
+                            title="Professional Summary"
+                            icon={<Briefcase className="section-icon" />}
+                        >
                         <div className="form-group">
                             <textarea
                                 value={summary}
@@ -381,14 +359,16 @@ const handleSaveToLibrary = async () => {
                                 rows={4}
                             />
                         </div>
+                        </Collapsible>
                     </section>
 
                     {/* Work Experience */}
-                    <section className="form-section">
-                        <div className="section-header">
-                            <Briefcase className="section-icon" />
-                            <h2>Work Experience</h2>
-                        </div>
+<section className="form-section">
+                        <Collapsible
+                            title="Work Experience"
+                            icon={<Briefcase className="section-icon" />}
+                            badge={experience.length}
+                        >
                         {experience.map((exp, index) => (
                             <div key={index} className="entry-block">
                                 <div className="entry-header">
@@ -454,14 +434,16 @@ const handleSaveToLibrary = async () => {
                         <button type="button" className="add-entry-btn" onClick={addExperienceEntry}>
                             + Add Experience
                         </button>
+                        </Collapsible>
                     </section>
 
                     {/* Education */}
-                    <section className="form-section">
-                        <div className="section-header">
-                            <BookOpen className="section-icon" />
-                            <h2>Education</h2>
-                        </div>
+<section className="form-section">
+                        <Collapsible
+                            title="Education"
+                            icon={<BookOpen className="section-icon" />}
+                            badge={education.length}
+                        >
                         {education.map((edu, index) => (
                             <div key={index} className="entry-block">
                                 <div className="entry-header">
@@ -529,14 +511,15 @@ const handleSaveToLibrary = async () => {
                         <button type="button" className="add-entry-btn" onClick={addEducationEntry}>
                             + Add Education
                         </button>
+                        </Collapsible>
                     </section>
 
                     {/* Skills */}
-                    <section className="form-section">
-                        <div className="section-header">
-                            <Zap className="section-icon" />
-                            <h2>Skills</h2>
-                        </div>
+<section className="form-section">
+                        <Collapsible
+                            title="Skills"
+                            icon={<Zap className="section-icon" />}
+                        >
                         <div className="form-group">
                             <label>Skills (comma-separated)</label>
                             <textarea
@@ -546,14 +529,16 @@ const handleSaveToLibrary = async () => {
                                 rows={3}
                             />
                         </div>
+                        </Collapsible>
                     </section>
 
                     {/* Certifications */}
-                    <section className="form-section">
-                        <div className="section-header">
-                            <Award className="section-icon" />
-                            <h2>Certifications</h2>
-                        </div>
+<section className="form-section">
+                        <Collapsible
+                            title="Certifications"
+                            icon={<Award className="section-icon" />}
+                            badge={certifications.length}
+                        >
                         {certifications.map((cert, index) => (
                             <div key={index} className="entry-block">
                                 <div className="entry-header">
@@ -608,6 +593,7 @@ const handleSaveToLibrary = async () => {
                         <button type="button" className="add-entry-btn" onClick={addCertificationEntry}>
                             + Add Certification
                         </button>
+                        </Collapsible>
                     </section>
                 </div>
 
