@@ -1,26 +1,34 @@
+// ==========================================
 // MAKE FRESH RESUME - STYLESHEET
 // ==========================================
 
 // Color Palette Variables (Matching App Theme)
-$bg-gradient: linear-gradient(135deg, #163E8C 0%, #0D0D0D 100%);
-$bg-card: linear-gradient(135deg, #D0E9F2 0%, #C2E2D6 100%);
-$bg-input: #FFFFFF;
-$border-color: rgba(62, 140, 81, 0.25);
-$border-focus: #F2E205;
-$accent-gradient: linear-gradient(135deg, #F2E205 0%, #F2A007 100%);
-$text-dark: #0D0D0D;
-$text-light: #F8FAFC;
-$text-muted: #374151;
-$accent-green: #3E8C51;
-$danger-color: #EF4444;
+ $bg-gradient: linear-gradient(135deg, #163E8C 0%, #0D0D0D 100%);
+ $bg-card: linear-gradient(135deg, #D0E9F2 0%, #C2E2D6 100%);
+ $bg-input: #FFFFFF;
+ $border-color: rgba(62, 140, 81, 0.25);
+ $border-focus: #F2E205;
+ $accent-gradient: linear-gradient(135deg, #F2E205 0%, #F2A007 100%);
+ $text-dark: #0D0D0D;
+ $text-light: #F8FAFC;
+ $text-muted: #374151;
+ $accent-green: #3E8C51;
+ $danger-color: #EF4444;
 
+// ==========================================
+// ROOT CONTAINER
+// ==========================================
 .make-fresh-resume-form {
     min-height: auto;
     background: $bg-gradient;
     color: $text-light;
     padding: 2.5rem 1.5rem;
     box-sizing: border-box;
-        .form-topbar {
+
+    // ----------------------------------
+    // TOP BAR (optional, unused in current JSX)
+    // ----------------------------------
+    .form-topbar {
         max-width: 1200px;
         margin: 0 auto 1rem auto;
         display: flex;
@@ -30,7 +38,9 @@ $danger-color: #EF4444;
         flex-wrap: wrap;
     }
 
-
+    // ----------------------------------
+    // HEADER
+    // ----------------------------------
     .form-header {
         max-width: 1200px;
         margin: 0 auto 2rem auto;
@@ -55,6 +65,9 @@ $danger-color: #EF4444;
         }
     }
 
+    // ----------------------------------
+    // ERROR BANNER
+    // ----------------------------------
     .error-banner {
         max-width: 1200px;
         margin: 0 auto 1.5rem auto;
@@ -67,6 +80,9 @@ $danger-color: #EF4444;
         font-weight: 500;
     }
 
+    // ----------------------------------
+    // FORM CONTAINER (2-col grid on desktop)
+    // ----------------------------------
     .form-container {
         max-width: 1200px;
         margin: 0 auto;
@@ -80,7 +96,9 @@ $danger-color: #EF4444;
         }
     }
 
-    // LEFT COLUMN STYLES
+    // ==========================================
+    // LEFT COLUMN
+    // ==========================================
     .form-left {
         display: flex;
         flex-direction: column;
@@ -224,14 +242,20 @@ $danger-color: #EF4444;
         }
     }
 
-    // RIGHT COLUMN STYLES (Sticky)
+    // ==========================================
+    // RIGHT COLUMN (Sticky on desktop, normal flow on mobile)
+    // ==========================================
     .form-right {
         position: sticky;
         top: 2rem;
         display: flex;
         flex-direction: column;
-        gap: 1.5rem;
+        gap: 1.25rem;
+        min-width: 0;
 
+        // ----------------------------------
+        // Upload card
+        // ----------------------------------
         .upload-card {
             background: $bg-card;
             border: 1px solid $border-color;
@@ -338,6 +362,7 @@ $danger-color: #EF4444;
 
                     .confirm-details {
                         flex: 1;
+                        min-width: 0;
 
                         .confirm-filename {
                             margin: 0;
@@ -373,8 +398,17 @@ $danger-color: #EF4444;
             }
         }
 
+        // ----------------------------------
+        // ACTION BUTTONS (Save + Generate)
+        // Both buttons share `.generate-btn` and stack vertically.
+        // Safety: explicit margin between siblings so they never visually
+        // overlap on any screen, even if flex gap is lost somewhere upstream.
+        // ----------------------------------
         .generate-btn {
+            position: relative;
+            flex: 0 0 auto;            // never grow/shrink → no squish
             width: 100%;
+            box-sizing: border-box;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -385,10 +419,17 @@ $danger-color: #EF4444;
             padding: 1.1rem 1.5rem;
             font-size: 1.1rem;
             font-weight: 700;
+            line-height: 1.2;
             border-radius: 12px;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
             box-shadow: 0 8px 20px rgba(242, 160, 7, 0.3);
+
+            // Hard gap between the two stacked buttons
+            // (works even if the flex `gap` is overridden by another rule)
+            & + .generate-btn {
+                margin-top: 0.5rem;
+            }
 
             &:hover:not(:disabled) {
                 transform: translateY(-2px);
@@ -403,26 +444,128 @@ $danger-color: #EF4444;
     }
 }
 
-// MOBILE POLISH
+// ==========================================
+// MOBILE: TABLET (<= 900px)
+// - 1-column layout
+// - right column becomes part of normal flow
+// - kill sticky + kill hover transform (touch devices can't hover anyway,
+//   and a "stuck" :hover state would lift one button over the other)
+// ==========================================
+@media (max-width: 900px) {
+    .make-fresh-resume-form .form-container {
+        grid-template-columns: 1fr;
+        min-width: 0;
+    }
+
+    .make-fresh-resume-form .form-container .form-left,
+    .make-fresh-resume-form .form-container .form-right {
+        min-width: 0;   // stops long content blowing the grid out
+    }
+
+    .make-fresh-resume-form .form-container .form-right {
+        order: 0;
+        position: static !important;   // override sticky from desktop
+        top: auto;
+        // Re-declare layout to guarantee stacking
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .make-fresh-resume-form .form-right .generate-btn {
+        padding: 0.9rem 1rem;
+        font-size: 1rem;
+        transform: none !important;   // no lift on touch — prevents "stuck hover" overlap
+
+        & + .generate-btn {
+            margin-top: 0.75rem;      // hard gap so buttons never touch
+        }
+    }
+}
+
+// ==========================================
+// MOBILE: SMALL PHONES (<= 700px)
+// - nothing overflows the viewport
+// ==========================================
+@media (max-width: 700px) {
+    .make-fresh-resume-form {
+        padding: 1.5rem 1rem;
+        overflow-x: clip;
+        overflow-wrap: break-word;
+    }
+
+    .make-fresh-resume-form .form-container {
+        gap: 1.25rem;
+    }
+
+    .make-fresh-resume-form .form-header {
+        margin-bottom: 1.25rem;
+
+        h1 { font-size: 1.5rem; }
+        .form-subtitle { font-size: 0.88rem; }
+    }
+
+    .make-fresh-resume-form .form-left .form-section {
+        padding: 1.1rem;
+        border-radius: 14px;
+
+        .section-header {
+            margin-bottom: 1.1rem;
+
+            h2 { font-size: 1.1rem; }
+        }
+
+        .entry-block { padding: 0.85rem; }
+    }
+
+    .make-fresh-resume-form .form-right {
+        gap: 0.9rem;
+    }
+
+    .make-fresh-resume-form .form-right .upload-card {
+        padding: 1.1rem;
+
+        .upload-zone { padding: 1.5rem 1rem; }
+    }
+
+    .make-fresh-resume-form .form-right .generate-btn {
+        padding: 0.9rem 1rem;
+        font-size: 0.95rem;
+
+        & + .generate-btn {
+            margin-top: 0.7rem;
+        }
+    }
+}
+
+// ==========================================
+// MOBILE: TINY PHONES (<= 480px)
+// ==========================================
 @media (max-width: 480px) {
     .make-fresh-resume-form {
         padding: 1.25rem 1rem;
     }
 
     .make-fresh-resume-form .form-header h1 {
-        font-size: 1.6rem;
-    }
-}
-
-// MOBILE FLOW: upload card first, generate button always reachable
-@media (max-width: 900px) {
-    .make-fresh-resume-form .form-container .form-right {
-        order: -1;   // upload leads on phones — it can prefill the whole form
+        font-size: 1.55rem;
     }
 
-    .make-fresh-resume-form .form-left .generate-btn {
-        position: sticky;
-        bottom: 1rem;
-        z-index: 50;
+    .make-fresh-resume-form .form-header .form-subtitle {
+        font-size: 0.85rem;
+    }
+
+    .make-fresh-resume-form .form-right {
+        gap: 0.85rem;
+    }
+
+    .make-fresh-resume-form .form-right .generate-btn {
+        padding: 0.85rem 0.9rem;
+        font-size: 0.92rem;
+        line-height: 1.2;
+        transform: none !important;
+
+        & + .generate-btn {
+            margin-top: 0.6rem;
+        }
     }
 }

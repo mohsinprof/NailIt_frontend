@@ -1,29 +1,27 @@
-import { Link, useNavigate } from "react-router";
+import { Link, Navigate } from "react-router";
 import { useAuth } from "../hooks/useAuth";
 import "../auth.form.scss";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+
 import Loading from "./Loading.jsx";
 export default function Login() {
-const navigate =useNavigate()
-
-
 const { isLoading, handleLogin ,user } = useAuth()
     const [email, setemail] = useState("")
     const [password, setpassword] = useState("")
 
   const handleSubmit = async (e) => {
-       
     e.preventDefault()
-    
-   const isSuccess = await handleLogin(email, password);
-if (isSuccess) {
-  navigate("/"); 
-}
-    
-    
-  
+    // On success `user` is stored in AuthContext and the declarative
+    // <Navigate> below sends the visitor home. On failure we stay here.
+    await handleLogin(email, password);
   }
 
+    // Already signed in? Never render the login form - go straight home.
+    // This also covers a hard refresh / direct visit to /login while the
+    // auth cookie is still valid.
+    if (user) {
+      return <Navigate to="/" replace />
+    }
 
     if (isLoading) {
       return (

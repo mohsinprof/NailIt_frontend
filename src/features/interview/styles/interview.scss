@@ -540,22 +540,6 @@ $score-low: #EF4444; // Red
         }
     }
 }
-// MOBILE POLISH
-@media (max-width: 480px) {
-    .interview-report-page {
-        padding: 1rem 0.75rem;
-    }
-
-    .interview-report-page .report-container {
-        gap: 1.25rem;
-        overflow-wrap: break-word;     // long words never cause sideways scroll
-    }
-
-    .interview-report-page .report-container .report-header .score-overview-card {
-        padding: 1.25rem;
-        gap: 1.25rem;
-    }
-}
 
 // ==========================================
 // MOBILE FIT PASS (<=700px) — nothing overflows the viewport
@@ -571,6 +555,7 @@ $score-low: #EF4444; // Red
     .interview-report-page .report-container {
         min-width: 0;
         gap: 1.25rem;
+        overflow-wrap: break-word;   // long words never cause sideways scroll
     }
 
     // ---- Header: brand badge + score card ----
@@ -679,5 +664,54 @@ $score-low: #EF4444; // Red
 
         .day-content h4 { font-size: 1rem; margin-bottom: 0.75rem; }
         .day-content .task-list li { font-size: 0.88rem; align-items: flex-start; }
+    }
+}
+
+// ==========================================
+// NARROW PHONES (<=360px) — iPhone SE / Galaxy A series.
+// The 3-tab row ("Technical / Behavioral / Prep Plan") is the tightest
+// element on the page: with the icon + gap it needs ~230px of text, so on
+// a 320px screen "Behavioral" wraps to two lines and the row goes uneven.
+// ==========================================
+@media (max-width: 360px) {
+    .interview-report-page {
+        padding: 0.85rem 0.6rem;
+    }
+
+    .interview-report-page .report-container {
+        gap: 1rem;
+    }
+
+    .interview-report-page .report-container .report-main-grid .workspace-center .report-tabs {
+        gap: 0.25rem;
+        padding: 0.25rem;
+
+        .tab-btn {
+            padding: 0.5rem 0.2rem;
+            font-size: 0.7rem;
+            white-space: nowrap;      // never wrap -> row keeps a single height
+            overflow: hidden;
+            text-overflow: ellipsis;
+
+            .tab-icon { width: 13px; height: 13px; }
+        }
+    }
+
+    // Long PDF/download labels must never push past the card edge
+    .interview-report-page .report-container .report-header .score-overview-card .score-details {
+        min-width: 0;
+
+        .report-actions .pdf-download-btn {
+            font-size: 0.78rem;
+
+            span { min-width: 0; overflow-wrap: anywhere; }
+        }
+    }
+
+    .interview-report-page .report-container .report-header .score-overview-card .score-badge-circle {
+        width: 76px;
+        height: 76px;
+
+        .score-number { font-size: 1.3rem; }
     }
 }

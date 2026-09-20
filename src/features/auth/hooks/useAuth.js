@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { AuthContext } from "../auth.context";
 import { login,register,logout,getme } from "../services/auth.api";
 import { useNavigate } from "react-router";
@@ -62,26 +62,11 @@ export const useAuth = () => {
             setIsLoading(false);
         }
     };
-    useEffect(() => {
-        const checkUserOnLoad = async () => {
-            try {
-                const data = await getme();
-                setUser(data?.user || null);
-                // console.log("getme data:", data)
-                
-                
 
-            } catch (error) {
-                setUser(null);
-            } finally {
-                setIsLoading(false);
-            }
-        }
-        checkUserOnLoad();
-       
- 
-        
-
-   },[])
+    // NOTE: the session restore (/api/auth/get-me) deliberately does NOT live in
+    // this hook anymore. It runs exactly once inside AuthProvider
+    // (features/auth/auth.context.jsx). Keeping the effect here meant every
+    // component that called useAuth() - Navbar, Protected, Login, Register,
+    // LogoutButton - fired its own get-me request on mount.
     return {user,isLoading,setIsLoading,handleLogin,handleRegister,handleLogout,handleGetMe}
 }
