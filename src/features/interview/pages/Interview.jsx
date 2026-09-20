@@ -166,6 +166,9 @@ const handleSaveTailoredResume = async () => {
           
           <div className="score-overview-card">
             <div className={`score-badge-circle ${scoreInfo.class}`}>
+              {console.log(report.matchScore)}
+              {console.log(report.title)}
+              {console.log(report.scoreReasoning)}
               <span className="score-number">{report.matchScore || 0}%</span>
               <span className="score-label">Match</span>
             </div>

@@ -11,7 +11,7 @@ export const useInterview = () => {
     setError(null);
     try {
       const response = await generateInterviewReport({ jobDescription, selfDescription, resume });
-      const newReport = response.data;   // api returns the body: { message, data }
+      const newReport = response.data.data || response.data;   // api returns the body: { message, data }
       setReport(newReport);              // Interview page renders instantly after navigate()
       setReports(prev => [newReport, ...(Array.isArray(prev) ? prev : [])]); // newest first in history
       return newReport;
@@ -30,8 +30,9 @@ export const useInterview = () => {
     setError(null);
     try {
       const response = await getInterviewReportById(interviewId);
-      setReport(response.data);          // <- setReport (single), NOT setReports (array)
-      return response.data;
+      const reportData = response.data.data || response.data
+      setReport(reportData);          // <- setReport (single), NOT setReports (array)
+      return reportData;
     } catch (err) {
       console.error("Failed to fetch interview report:", err);
       setError(err);
