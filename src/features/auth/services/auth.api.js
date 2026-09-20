@@ -32,6 +32,26 @@ export async function login({ email, password }) {
         throw new Error(realmessage);
     }
 }
+export async function forgotPassword({ email }) {
+    try {
+        const response = await api.post('/api/auth/forgot-password', { email })
+        return response.data
+    } catch (e) {
+        const realmessage = e.response?.data?.message || e.message || "An error occurred";
+        throw new Error(realmessage);
+    }
+}
+
+export async function resetPassword({ token, password }) {
+    try {
+        const response = await api.post('/api/auth/reset-password', { token, password })
+        return response.data
+    } catch (e) {
+        const realmessage = e.response?.data?.message || e.message || "An error occurred";
+        throw new Error(realmessage);
+    }
+}
+
 export async function logout() {
     try {
         const response = await api.get('/api/auth/logout', {

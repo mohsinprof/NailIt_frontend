@@ -22,6 +22,11 @@
             box-shadow: 0 4px 15px rgba(242, 160, 7, 0.35);
         }
     }
+        &:disabled {
+        opacity: 0.65;
+        cursor: not-allowed;
+    }
+
 
     &:active {
         transform: scale(1.05); // Kept your scaling behavior

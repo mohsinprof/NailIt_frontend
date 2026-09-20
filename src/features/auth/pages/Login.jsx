@@ -53,6 +53,8 @@ const { isLoading, handleLogin ,user } = useAuth()
                  onChange={(e) => { setpassword(e.target.value) }}
               type="password" id="password"  name="password" required placeholder="••••••••" />
           </div>
+                    <p><Link className="link" to="/forgot-password">Forgot password?</Link></p>
+
           <button className="button primary-button">Login</button>
           
         </form>

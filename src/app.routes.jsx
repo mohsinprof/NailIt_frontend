@@ -7,8 +7,8 @@ import Layout from "./features/auth/Layout";
 import Home from "./features/interview/pages/Home";
 import Interview from "./features/interview/pages/Interview";
 import MakeFreshResumeForm from "./features/makeFreshResume/pages/MakeFreshResume";
-
-
+import ForgotPassword from "./features/auth/pages/ForgotPassword";
+import ResetPassword from "./features/auth/pages/ResetPassword";
 
 
 export const router = createBrowserRouter([
@@ -39,6 +39,15 @@ export const router = createBrowserRouter([
                 path: "/register",
                 element: <Register />,
             },
+                        {
+                path: "/forgot-password",
+                element: <ForgotPassword />,
+            },
+            {
+                path: "/reset-password",
+                element: <ResetPassword />,
+            },
+
             {
                 path: "*",
                 element: <NotFound />,
