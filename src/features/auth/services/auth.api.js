@@ -19,11 +19,10 @@ export async function register({ username, email, password }) {
         throw new Error(realmessage);
     }
 }
-export async function login({ email, password }) {
-    
+export async function login({ identifier, password }) {
     try {
         const response = await api.post('/api/auth/login', {
-            email, password
+            identifier, password
         })
             console.log("backend saying :)", response.data.message)
         return response.data

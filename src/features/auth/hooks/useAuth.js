@@ -9,33 +9,31 @@ export const useAuth = () => {
     const context = useContext(AuthContext);
     
     const { user, setUser, isLoading, setIsLoading } = context;
-    const handleLogin = async (email, password) => {
+    // Resolves to null on success, or the backend's error message to display.
+    const handleLogin = async (identifier, password) => {
         setIsLoading(true);
-        // console.log("haddle login ",email,password)
-
-
         try {
-            const data = await login({ email, password });
+            const data = await login({ identifier, password });
             setUser(data?.user);
-            return true;
+            return null;
         } catch (error) {
             console.error("Login failed:", error);
-            return false;
-        }finally{
+            return error.message || 'Something went wrong. Please try again.';
+        } finally {
             setIsLoading(false);
         }
     };
 
+    // Resolves to null on success, or the backend's error message to display.
     const handleRegister = async (username, email, password) => {
         setIsLoading(true);
-        //  console.log("handleRegister called with:", username, email, password);
         try {
             const data = await register({ username, email, password });
             setUser(data?.user);
-            return true;
-            // console.log("Registration successful:", data);
+            return null;
         } catch (error) {
             console.error("Register failed:", error);
+            return error.message || 'Something went wrong. Please try again.';
         } finally {
             setIsLoading(false);
         }

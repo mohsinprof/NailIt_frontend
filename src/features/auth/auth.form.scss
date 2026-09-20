@@ -102,4 +102,74 @@ main {
         }
     }
 
+    // Password strength checklist (Register + ResetPassword pages)
+    .password-rules {
+        list-style: none;
+        margin: -0.3rem 0 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+        font-size: 0.78rem;
+        color: $text-muted;
+
+        li {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+
+            &::before {
+                content: '○';
+                color: $accent-orange;
+                font-size: 0.7rem;
+            }
+
+            &.met {
+                color: $accent-green;
+
+                &::before {
+                    content: '✓';
+                }
+            }
+        }
+    }
+
+    // Show/hide password (PasswordInput component)
+    .password-field {
+        position: relative;
+
+        // give the eye room; this block comes AFTER .input-group in this file,
+        // so this padding-right wins the specificity tie with it
+        input {
+            width: 100%;
+            padding-right: 2.8rem;
+        }
+
+        .toggle-password {
+            position: absolute;
+            top: 50%;
+            right: 0.6rem;
+            transform: translateY(-50%);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.25rem;
+            border: none;
+            background: transparent;
+            color: $text-muted;
+            cursor: pointer;
+            border-radius: 0.4rem;
+            transition: color 0.2s ease;
+
+            &:hover {
+                color: $accent-green;
+            }
+
+            &:focus-visible {
+                outline: 2px solid $border-focus;
+                outline-offset: 1px;
+            }
+        }
+    }
+
 }

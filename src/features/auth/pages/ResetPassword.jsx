@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router";
 import { resetPassword } from "../services/auth.api";
+import { PASSWORD_RULES, unmetPasswordRules, MIN_PASSWORD_LENGTH } from "../passwordRules";
+import PasswordInput from "../components/PasswordInput";
 import "../auth.form.scss";
-
-const MIN_PASSWORD_LENGTH = 8;
 
 export default function ResetPassword() {
   const navigate = useNavigate();
@@ -16,13 +16,16 @@ export default function ResetPassword() {
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
 
+  const unmet = unmetPasswordRules(password);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
     setMessage("");
 
-    if (password.length < MIN_PASSWORD_LENGTH) {
-      setError(`Password must be at least ${MIN_PASSWORD_LENGTH} characters long`);
+    // Same client-side mirror of the backend rules as Register.jsx.
+    if (unmet.length > 0) {
+      setError(`Password needs ${unmet.map((r) => r.label.toLowerCase()).join(', ')}`);
       return;
     }
     if (password !== confirmPassword) {
@@ -71,28 +74,37 @@ export default function ResetPassword() {
         <form onSubmit={handleSubmit}>
           <div className="input-group">
             <label htmlFor="password">New password:</label>
-            <input
+            <PasswordInput
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              type="password"
               id="password"
               name="password"
               required
               minLength={MIN_PASSWORD_LENGTH}
               placeholder="••••••••"
+              autoComplete="new-password"
             />
           </div>
 
+          {/* live strength checklist - renders only once the user starts typing */}
+          {password.length > 0 && (
+            <ul className="password-rules">
+              {PASSWORD_RULES.map((rule) => (
+                <li key={rule.id} className={unmet.includes(rule) ? '' : 'met'}>{rule.label}</li>
+              ))}
+            </ul>
+          )}
+
           <div className="input-group">
             <label htmlFor="confirmPassword">Confirm new password:</label>
-            <input
+            <PasswordInput
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
-              type="password"
               id="confirmPassword"
               name="confirmPassword"
               required
               placeholder="••••••••"
+              autoComplete="new-password"
             />
           </div>
 
